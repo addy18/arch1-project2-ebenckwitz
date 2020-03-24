@@ -2,7 +2,7 @@
 #include "switches.h"
 #include "led.h"
 
-char side_switch_state_down, switch1_state_down, switch2_state_down, switch3_state_down, switch4_state_down;
+char side_switch_state_down, switch1_state_down, switch2_state_down, switch3_state_down, switch4_state_down, switch_state_changed;
 
 static char
 switch_update_interrupt_sense_p1()
@@ -56,5 +56,7 @@ switch_interrupt_handler()
   switch1_state_down = (p2val & SW1) ? 0 : 1;   /* 0 when SW1 is up */
   switch2_state_down = (p2val & SW2) ? 0 : 1;
   switch3_state_down = (p2val & SW3) ? 0 : 1;
-  switch4_state_down = (p2val & SW4) ? 0 : 1;  
+  switch4_state_down = (p2val & SW4) ? 0 : 1;
+  
+  switch_state_changed = 1;
 }

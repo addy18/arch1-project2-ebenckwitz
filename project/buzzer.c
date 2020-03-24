@@ -1,6 +1,7 @@
 #include <msp430.h>
 #include "libTimer.h"
 #include "buzzer.h"
+#include "led.h"
 
 void buzzer_init()
 {
@@ -55,40 +56,41 @@ void song_two()
   switch(counter_song_two) {
   case 0: 
   case 6: 
-  case 19: buzzer_set_period(800); counter_song_two++; led_update(0,1); break; 
+  case 19: buzzer_set_period(800); counter_song_two++; red_on=0,green_on=1; led_update(); break; 
   case 1:
   case 7: 
-  case 20: buzzer_set_period(750); counter_song_two++; led_update(1,0); break;
+  case 20: buzzer_set_period(750); counter_song_two++; red_on=1,green_on=0; led_update(); break;
   case 2:
   case 8: 
-  case 21: buzzer_set_period(600); counter_song_two++; led_update(1,1); break;
+  case 21: buzzer_set_period(600); counter_song_two++; red_on=1,green_on=1; led_update(); break;
   case 3:
   case 9: 
-  case 22: buzzer_set_period(650); counter_song_two++; led_update(0,1); break; 
+  case 22: buzzer_set_period(650); counter_song_two++; red_on=0,green_on=1; led_update(); break; 
   case 4:
   case 10: 
-  case 23: buzzer_set_period(500); counter_song_two++; led_update(1,0); break;
+  case 23: buzzer_set_period(500); counter_song_two++; red_on=1,green_on=0; led_update(); break;
   case 5:
   case 11: 
   case 24:
     buzzer_set_period(550);
-    led_update(1,1);
+    red_on = 1, green_on = 1;
+    led_update();
     if(counter_song_two== 24) {
       counter_song_two = 0;
     }else{
       counter_song_two++;
     }
     break;
-  case 12: buzzer_set_period(1000); counter_song_two++; led_update(1,0); break;
-  case 13: buzzer_set_period(1050); counter_song_two++; led_update(0,1); break;
-  case 14: buzzer_set_period(900); counter_song_two++; led_update(1,1); break;
-  case 15: buzzer_set_period(950); counter_song_two++; led_update(1,0); break;
-  case 16: buzzer_set_period(1500); counter_song_two++; led_update(0,1); break;
-  case 17: buzzer_set_period(800); counter_song_two++; led_update(1,1); break;
-  case 18: buzzer_set_period(850); counter_song_two++; led_update(0,0); break;
+  case 12: buzzer_set_period(1000); counter_song_two++; red_on=0,green_on=1; led_update(); break;
+  case 13: buzzer_set_period(1050); counter_song_two++; red_on=1,green_on=0; led_update(); break;
+  case 14: buzzer_set_period(900); counter_song_two++; red_on=1,green_on=1; led_update(); break;
+  case 15: buzzer_set_period(950); counter_song_two++; red_on=0,green_on=1; led_update(); break;
+  case 16: buzzer_set_period(1500); counter_song_two++; red_on=1,green_on=0; led_update(); break;
+  case 17: buzzer_set_period(800); counter_song_two++; red_on=1,green_on=1; led_update(); break;
+  case 18: buzzer_set_period(850); counter_song_two++; red_on=0,green_on=0; led_update(); break;
   }
 }
-
+				
 void reset_counters()/*this will reset the counters. Songs will restart when switch is pressed*/
 {
   counter_song_one = 0;
