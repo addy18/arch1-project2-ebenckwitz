@@ -3,21 +3,33 @@ The following toy that was created by Ethan Benckwitz has four different
 options on what to do. There are four different switches next to each other,
 and another switch on the side of the toy to  head back into the menu of
 options.
+
 MAIN MENU: Before choosing any switch, both LED lights will be on to indicate
 that you are inside the main menu.
+
 SWITCH1: Choosing this will blink the red LED really fast to the point
 where it almost looks like it is partially dim.
+
 SWITCH2: Choosing this will blink the red and green LED back and forth in a
-quickly matter.
+quickly matter. HOWEVER, this was supposed to be calling the assembly language
+but, when I used the assembly language it would only leave the red LED on and
+the green light would barely dim at times. I was unable to figure this out so
+I used the C language method I made for presentation purposes but the assembly
+language is available to see. 
+
 SWITCH3: Choosing this will leave both LED lights on but the buzzer will play
 an ascending sound! Once it reaches the top it will go back to the very
 beginning and replay the sound.
+
 SWITCH4: Choosing this will play a little song created by Ethan and the LED
 lights will match each different sound produced. Once the song is over it will
 continue to replay until main menu button is pressed.
 
 When wanting to compile it, all you have to do is type make load to activate
-the toy!
+the toy! IMPORTANT: When toy is first compiled, it takes me a couple of
+presses  or a more forced push on a button to activate the toy. After that,
+pressing other buttons are not an issue.
+
 
 *Once you are inside any of the switches, you cannot press any other button to
  expect an action. You must press the return to menu button which is on the
