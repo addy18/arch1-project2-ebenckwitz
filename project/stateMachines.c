@@ -3,6 +3,7 @@
 #include "led.h"
 #include "buzzer.h"
 #include "switches.h"
+#include "assembly.h"
 
 static enum{START, MENU_OPTION0, MENU_OPTION1, MENU_OPTION2, MENU_OPTION3, FLASH} current_state = START;
 char tempo;
@@ -11,7 +12,9 @@ void state_advance()
 {
   switch(current_state) { /*the toy will always begin with both led lights on */
   case START:
-    led_update(1, 1);
+    red_on = 1;
+    green_on = 1;
+    led_update();
     if(switch1_state_down) { /*this will allow the user to choose betwween the four switches*/
       current_state = MENU_OPTION0;
     }else if(switch2_state_down) {
@@ -24,7 +27,8 @@ void state_advance()
     break;
   case MENU_OPTION0:/*MENU_OPTION0 is just flashing the red led light very quickly to make it dim*/
     tempo = 5;
-    led_update(0,1);
+    red_on = 1, green_on = 0;
+    led_update();
     current_state = FLASH;
     if(side_switch_state_down) {
        current_state = START;
@@ -32,18 +36,27 @@ void state_advance()
     break;
   case FLASH: /*this is to help MENU_OPTION0 with the flash*/
     tempo = 5;
-    led_update(0,0);
+    red_on = 0, green_on = 0;
+    led_update();
     current_state = MENU_OPTION0;
     if(side_switch_state_down) {
       current_state = START;
     }
     break;
   case MENU_OPTION1: /*the MENU_OPTION1 will flash red and green back and forth pretty quickly*/
+    /*this is in assembly.s that i could not figure out, would not work the way i wanted */
+    /*red_on = 0;
+    green_on = 1;
+    led_update();
+    switching_leds_assembly();
+    led_update();*/
+
     tempo = 75;
-    switching_leds();
-    if(side_switch_state_down) {
-      current_state = START;
-    }
+    switching_leds(); /* using this method since assembly won't work as wanted*/
+      if(side_switch_state_down) {
+	current_state = START;
+      }
+
     break;
   case MENU_OPTION2:/*the MENU_OPTION2 will play a sound that will slowly go higher then restart*/
     tempo = 50;
@@ -65,12 +78,13 @@ void state_advance()
   }
 }
 
-void switching_leds()/*this method will make it easier to switch between red and green LED*/
-{
-  char changed = 0;
+/*using this method since my assmbly won't follow as I wanted. */
+void switching_leds()//this method will make it easier to switch between red and green LED
+{ 
   static enum {R=0, G=1} color = G;
+
   switch(color) {
-  case G: led_update(1,0); color = R; break;
-  case R: led_update(0,1); color = G; break;
+  case G: green_on = 1; red_on = 0; led_update(); color = R; break;
+  case R: green_on = 0; red_on = 1; led_update(); color = G; break;
   }
-}
+} 
