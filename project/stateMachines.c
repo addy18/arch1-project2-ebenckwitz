@@ -45,15 +45,19 @@ void state_advance()
     break;
   case MENU_OPTION1: /*the MENU_OPTION1 will flash red and green back and forth pretty quickly*/
     /*this is in assembly.s that i could not figure out, would not work the way i wanted */
-    /*red_on = 0;
-    green_on = 1;
-    led_update();
+    red_on = 1;
+    green_on = 0;
+    //led_update();
     switching_leds_assembly();
-    led_update();*/
+    led_update();
+    if(switch2_state_down){
+      switching_leds_assembly();
+      led_update();
+    }
 
-    tempo = 75;
-    switching_leds(); /* using this method since assembly won't work as wanted*/
-      if(side_switch_state_down) {
+    //tempo = 75;
+    //switching_leds(); /* using this method since assembly won't work as wanted*/
+    if(side_switch_state_down) {
 	current_state = START;
       }
 
