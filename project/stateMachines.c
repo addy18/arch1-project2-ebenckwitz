@@ -5,7 +5,7 @@
 #include "switches.h"
 #include "assembly.h"
 
-static enum{START, MENU_OPTION0, MENU_OPTION1, MENU_OPTION2, MENU_OPTION3, FLASH} current_state = START;
+static enum{START, MENU_OPTION0, MENU_OPTION1, MENU_OPTION2, MENU_OPTION3, FLASH, assembly_help} current_state = START;
 char tempo;
 
 void state_advance()
@@ -44,23 +44,25 @@ void state_advance()
     }
     break;
   case MENU_OPTION1: /*the MENU_OPTION1 will flash red and green back and forth pretty quickly*/
-    /*this is in assembly.s that i could not figure out, would not work the way i wanted */
+    tempo = 75;
     red_on = 1;
     green_on = 0;
-    //led_update();
     switching_leds_assembly();
     led_update();
-    if(switch2_state_down){
-      switching_leds_assembly();
-      led_update();
-    }
-
-    //tempo = 75;
-    //switching_leds(); /* using this method since assembly won't work as wanted*/
-    if(side_switch_state_down) {
+    current_state = assembly_help;
+     if(side_switch_state_down) {
 	current_state = START;
       }
 
+    break;
+  case assembly_help: /*this will help the assembly code repeatedly flash the LEDs*/
+    tempo = 75;
+    switching_leds_assembly();
+    led_update();
+    current_state = assembly_help;
+    if(side_switch_state_down) {
+	current_state = START;
+      }
     break;
   case MENU_OPTION2:/*the MENU_OPTION2 will play a sound that will slowly go higher then restart*/
     tempo = 50;

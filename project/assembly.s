@@ -4,7 +4,7 @@
 	.global switching_leds_assembly
 switching_leds_assembly:
 	cmp.b #1, &green_on	; if green is on
-	jmp red			; go to red
+	jz red			; go to red
 	
 	mov.b #1, &green_on	; turn on green light
 	mov.b #0, &red_on	; turn off red light
