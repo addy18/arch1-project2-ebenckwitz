@@ -1,5 +1,5 @@
 ##Description
-The following toy that was created by Ethan Benckwitz has four different
+The following toy that was created by Ethan Benckwitz and has four different
 options on what to do. There are four different switches next to each other,
 and another switch on the side of the toy to  head back into the menu of
 options.
@@ -11,11 +11,9 @@ SWITCH1: Choosing this will blink the red LED really fast to the point
 where it almost looks like it is partially dim.
 
 SWITCH2: Choosing this will blink the red and green LED back and forth in a
-quickly matter. HOWEVER, this was supposed to be calling the assembly language
-but, when I used the assembly language it would only leave the red LED on and
-the green light would barely dim at times. I was unable to figure this out so
-I used the C language method I made for presentation purposes but the assembly
-language is available to see. 
+quickly matter. I wrote this code in the assembly.s file and it works properly. I
+make two calls in the state machine so the lights can switch back and forth
+because my assembly code just switches the LED light from one to another.  
 
 SWITCH3: Choosing this will leave both LED lights on but the buzzer will play
 an ascending sound! Once it reaches the top it will go back to the very
