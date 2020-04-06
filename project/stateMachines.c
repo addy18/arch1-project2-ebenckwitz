@@ -26,7 +26,7 @@ void state_advance()
     }
     break;
   case MENU_OPTION0:/*MENU_OPTION0 is just flashing the red led light very quickly to make it dim*/
-    tempo = 5;
+    tempo = 1;
     red_on = 1, green_on = 0;
     led_update();
     current_state = FLASH;
@@ -81,16 +81,5 @@ void state_advance()
       buzzer_set_period(-1);
       reset_counters();
     }
-  }
-}
-
-/*using this method since my assmbly won't follow as I wanted. */
-void switching_leds()//this method will make it easier to switch between red and green LED
-{ 
-  static enum {R=0, G=1} color = G;
-
-  switch(color) {
-  case G: green_on = 1; red_on = 0; led_update(); color = R; break;
-  case R: green_on = 0; red_on = 1; led_update(); color = G; break;
   }
 } 
