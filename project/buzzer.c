@@ -22,6 +22,7 @@ void buzzer_init()
 static int counter_song_one = 0;
 void song_one()
 {
+  /* Changing the set period every case to make a different sound */
   switch(counter_song_one) {
   case 0: buzzer_set_period(200); counter_song_one++; break;
   case 1: buzzer_set_period(250); counter_song_one++; break;
@@ -39,7 +40,7 @@ void song_one()
   case 13: buzzer_set_period(850); counter_song_one++; break;
   case 14: buzzer_set_period(900); counter_song_one++; break;
   case 15: buzzer_set_period(950); counter_song_one++; break;
-  case 16:
+  case 16: /* If case 16, you will restart the entire switch */
     buzzer_set_period(1000);
     if(counter_song_one==16){
       counter_song_one = 0;
@@ -53,6 +54,7 @@ void song_one()
 static int counter_song_two = 0;
 void song_two()
 {
+  /* Attempted to make a little melody with the sounds */
   switch(counter_song_two) {
   case 0: 
   case 6: 
@@ -71,7 +73,7 @@ void song_two()
   case 23: buzzer_set_period(500); counter_song_two++; red_on=1,green_on=0; led_update(); break;
   case 5:
   case 11: 
-  case 24:
+  case 24:/* This is where the song will reset */
     buzzer_set_period(550);
     red_on = 1, green_on = 1;
     led_update();
